@@ -21,3 +21,9 @@ port = 8000
 url = "mysql://<username>:<password>@<address>/<database>"
 pool_size = 5
 ```
+
+## 遇到的问题
+```shell
+# 配置跨域之后启动失败
+https://stackoverflow.com/questions/74867363/actix-cannot-start-server-service-0
+```

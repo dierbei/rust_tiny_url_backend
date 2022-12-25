@@ -8,6 +8,8 @@ edition = "2021"
 [dependencies]
 # web 框架
 actix-web = "4"
+# 跨域
+actix-cors = "0.6"
 
 # json
 serde = { version = "1.0.145", features = ["derive"] }

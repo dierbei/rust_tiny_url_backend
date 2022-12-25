@@ -1,4 +1,5 @@
-use actix_web::{App, HttpServer, web};
+use actix_web::{http::header, App, HttpServer, web};
+use actix_cors::Cors;
 use sqlx::mysql::MySqlPoolOptions;
 use crate::settings::Settings;
 
@@ -21,10 +22,14 @@ async fn main() -> Result<(), sqlx::Error> {
     println!("server listen {}", ip);
     HttpServer::new(move || {
         App::new()
-            .app_data(web::Data::new(pool.clone()))
-            .service(api::links::create_link)
-            .service(api::links::get_from_link)
-            .service(api::links::list_link)
+            .wrap(Cors::default().allow_any_origin().send_wildcard())
+            .service(
+            web::scope("/api")
+                .app_data(web::Data::new(pool.clone()))
+                .service(api::links::create_link)
+                .service(api::links::get_from_link)
+                .service(api::links::list_link)
+        )
     })
         .bind(&ip)?
         .run()
