@@ -1,0 +1,23 @@
+[package]
+name = "tiny-url-backend"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# web 框架
+actix-web = "4"
+
+# json
+serde = { version = "1.0.145", features = ["derive"] }
+serde_json = { version = "1.0.2", optional = true }
+
+# 随机字符
+nanoid = "0.4.0"
+
+# 读取配置
+config = "0.13.1"
+
+# 数据库
+sqlx = { version = "0.6", features = [ "runtime-actix-native-tls", "mysql" ] }
