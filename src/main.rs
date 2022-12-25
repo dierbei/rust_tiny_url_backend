@@ -22,7 +22,14 @@ async fn main() -> Result<(), sqlx::Error> {
     println!("server listen {}", ip);
     HttpServer::new(move || {
         App::new()
-            .wrap(Cors::default().allow_any_origin().send_wildcard())
+            .wrap( Cors::default()
+                       .allowed_origin("http://localhost:8080")
+                       .allowed_methods(vec!["GET", "POST"])
+                       .allowed_headers(vec![header::AUTHORIZATION, header::ACCEPT])
+                       .allowed_header(header::CONTENT_TYPE)
+                       .supports_credentials()
+                       .max_age(3600),
+            )
             .service(
             web::scope("/api")
                 .app_data(web::Data::new(pool.clone()))
