@@ -24,7 +24,7 @@ async fn main() -> Result<(), sqlx::Error> {
         App::new()
             .wrap( Cors::default()
                        .allowed_origin("http://localhost:8080")
-                       .allowed_methods(vec!["GET", "POST"])
+                       .allowed_methods(vec!["GET", "POST", "OPTIONS", "PUT", "DELETE"])
                        .allowed_headers(vec![header::AUTHORIZATION, header::ACCEPT])
                        .allowed_header(header::CONTENT_TYPE)
                        .supports_credentials()
